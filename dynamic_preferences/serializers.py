@@ -232,7 +232,7 @@ class ModelSerializer(InstanciatedSerializer):
         if value is None:
             return
         try:
-            pk = int(value)
+            pk = self.model._meta.pk.to_python(value)
             return self.model.objects.get(pk=pk)
         except:
             raise self.exception("Value {0} cannot be converted to pk".format(value))
